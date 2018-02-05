@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -172,13 +173,8 @@ public class Projet implements Devoir{
         return randWord;
     }
     
-
-    private int computeNbOfAnagramme(char[] word){
-        HashMap<Character, Integer> map = new HashMap<>();
-        for(char c : word){
-            if(map.containsKey(c)) map.put(c, map.get(c)+1);
-            else map.put(c,1);
-        }
-        return map.size();
+    private void printAnagrammes(char[] word){
+        
     }
 }
+
