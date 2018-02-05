@@ -62,19 +62,22 @@ public class Projet implements Devoir{
             reponse+= String.format("%,.2f", effMap.get(key)/(double)tailleDeListe)+" ;";
         }
         
-        reponse+= listerLesSommesEtFreqDEffectifDesIntervallesPasReguliers(effMap);
+        reponse+= listerLesSommesEtFreqDEffectifDesIntervallesPasReguliers(effMap, (double) tailleDeListe);
         
         return reponse;
     }
     
-    private String listerLesSommesEtFreqDEffectifDesIntervallesPasReguliers(HashMap<Double, Integer> effMap){
+    private String listerLesSommesEtFreqDEffectifDesIntervallesPasReguliers(HashMap<Double, Integer> effMap, double tailleListe){
         String rep = "rappel des intervalles : [ 0 ; 1 [, [ 1 ; 3 [, [ 3 ; 7 [, [ 7 ; 9 [ et [ 9 ; 10 [";
-        int un=0, deux=0, trois=0, quatre=0, cinq=0;
+        int un=0, deux=0, trois=0, quatre=0, cinq=0;        
+        double dun=0, ddeux=0, dtrois=0, dquatre=0, dcinq=0;
+
         for(Double key: effMap.keySet()){
             if(key<1.){
                 un+= effMap.get(key);
             }else if(key<3.){
                 deux+=effMap.get(key);
+                
             }else if(key<7.){
                 trois+=effMap.get(key);
             }else if(key<9.){
@@ -90,7 +93,24 @@ public class Projet implements Devoir{
         rep+= "\n[ 7 ; 9 [ -> "+quatre;
         rep+= "\n[ 9 ; 10 [ -> "+cinq;
         
-        rep+= "\nlister Les frequences D Effectif Des Intervalles";
+        rep+= "\nla liste des fréquences de ces mêmes intervalles, toujours séparés par une espace.";
+        
+        rep+= "\n[ 0 ; 1 [ -> "+(double)(un/tailleListe*100.)+"%";
+        rep+= "\n[ 1 ; 3 [ -> "+(double)(deux/tailleListe*100.)+"%";
+        rep+= "\n[ 3 ; 7 [ -> "+(double)(trois/tailleListe*100.)+"%";
+        rep+= "\n[ 7 ; 9 [ -> "+(double)(quatre/tailleListe*100.)+"%";
+        rep+= "\n[ 9 ; 10 [ -> "+(double)(cinq/tailleListe*100.)+"%";
+        
+        
+        rep+= "\na liste des densités de ces mêmes intervalles, toujours séparés par une espace.";
+        
+        rep+= "\n[ 0 ; 1 [ -> "+un/tailleListe;
+        rep+= "\n[ 1 ; 3 [ -> "+deux/tailleListe;
+        rep+= "\n[ 3 ; 7 [ -> "+trois/tailleListe;
+        rep+= "\n[ 7 ; 9 [ -> "+quatre/tailleListe;
+        rep+= "\n[ 9 ; 10 [ -> "+cinq/tailleListe;
+        
+        
         return rep;
     }
 }
