@@ -8,6 +8,8 @@ package math_miniprojet_moineau;
 import java.lang.reflect.Array;
 import java.util.*;
 
+import static java.util.Collections.shuffle;
+
 /**
  *
  * @author max
@@ -61,11 +63,13 @@ public class Projet implements Devoir{
            somethingaboutoccurences*=fact(nb);
         }
         int nb_max = fact(word.length)/somethingaboutoccurences;
-
+        Stack<Character> randomrandomrandom = new Stack<>();
         while(annagrammes.size()<nb_max){
             String randomWord ="";
+            randomrandomrandom.addAll(occurences.keySet());
+            shuffle(randomrandomrandom);
             for(int l =0; l<7;l++){
-               randomWord += getARandLetter(occurences);
+                randomWord += randomrandomrandom.pop();
             }
             annagrammes.add(randomWord);
             System.out.println(randomWord);
@@ -75,18 +79,6 @@ public class Projet implements Devoir{
         return new ArrayList<>(annagrammes);
     }
 
-    private char getARandLetter(HashMap<Character, Integer> occurences) {
-
-        HashMap<Character, Integer> copy = new HashMap<>(occurences);
-
-       for(Character c : occurences.keySet()){
-           if(copy.get(c)==0) continue;
-           else {
-               copy.put(c, copy.get(c)-1);
-               return c;
-           }
-       }return '!';//cas d'erreur
-    }
 
     private int fact(int nb) {
         int res=1;
