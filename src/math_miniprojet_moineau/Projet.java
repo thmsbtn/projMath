@@ -161,4 +161,15 @@ public class Projet implements Devoir{
         }
         return randWord;
     }
+    
+    String makeEveryPossibility(char[] word){
+       //TODO
+        for(int a; a<word.length; a++){
+            for(int b; b<word.length; b++){
+                if(a!=b){
+                    
+                }
+            }
+        }        
+    }
 }
