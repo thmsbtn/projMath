@@ -1,0 +1,12 @@
+/build/
+lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask\.jar
+
+manifest\.mf
+
+nbproject/build-impl\.xml
+
+nbproject/genfiles\.properties
+
+*.properties
+
+nbproject/project\.xml
