@@ -5,17 +5,7 @@
  */
 package math_miniprojet_moineau;
 
-import java.util.AbstractSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -51,10 +41,58 @@ public class Projet implements Devoir{
         String reponse="";
         ArrayList<String> listToTranslate;
         char[] word = choisirUnMotDe7lettres();
-        listToTranslate = new ArrayList<>(makeEveryPossibility(word));
+        listToTranslate = new ArrayList(makeEveryPossibility(word));
         reponse += listToString(listToTranslate);
         return reponse;
     }
+
+    private ArrayList<String> makeEveryPossibility(char[] word) {
+        HashMap<Character, Integer> occurences = new HashMap<>();
+        for(char c : word){
+            if(occurences.containsKey(c))
+                occurences.put(c, occurences.get(c)+1);
+            else
+                occurences.put(c, 1);
+        }
+        TreeSet<String> annagrammes = new TreeSet<>();
+        int somethingaboutoccurences = 1;
+        for(char c : occurences.keySet()){
+           int nb= occurences.get(c);
+           somethingaboutoccurences*=fact(nb);
+        }
+        int nb_max = fact(word.length)/somethingaboutoccurences;
+
+        while(annagrammes.size()<nb_max){
+            String randomWord ="";
+            for(int l =0; l<7;l++){
+               randomWord += getARandLetter(occurences);
+            }
+            annagrammes.add(randomWord);
+            System.out.println(randomWord);
+        }
+        System.out.println("working");
+
+    }
+
+    private char getARandLetter(HashMap<Character, Integer> occurences) {
+       int randomi = (int) (Math.random()*occurences.keySet().size());
+       for(Character c : occurences.keySet()){
+           if(occurences.get(c)==0) continue;
+           else {
+               occurences.put(c, occurences.get(c)-1);
+               return c;
+           }
+       }
+    }
+
+    private int fact(int nb) {
+        int res=1
+        for(int i = nb; i>1; i--){
+            res*=i;
+        }
+        return res;
+    }
+
     private String listToString(ArrayList<String> listToTranslate){
         String res ="";
         for(String s : listToTranslate)
@@ -172,9 +210,6 @@ public class Projet implements Devoir{
         }
         return randWord;
     }
-    
-    private void printAnagrammes(char[] word){
-        
-    }
+
 }
 
