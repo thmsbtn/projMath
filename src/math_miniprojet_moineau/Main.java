@@ -14,8 +14,8 @@ public class Main {
         Projet p = new Projet();
         p.runExercice();
         
-        DM dm = new DM();
-        dm.runExercice();
+        //DM dm = new DM();
+        //dm.runExercice();
     }
     
 }

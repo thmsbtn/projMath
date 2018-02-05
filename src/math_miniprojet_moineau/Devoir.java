@@ -13,8 +13,8 @@ public interface Devoir {
     void runExercice();
     
     static void print(String enonce, String reponse){
-        System.out.println("* "+enonce+" :");
-        System.out.println("\t _"+reponse);
+        System.out.println("-------------------------\n* "+enonce+" \n");
+        System.out.println(reponse);
     }
     
 }

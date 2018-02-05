@@ -20,35 +20,10 @@ public class DM implements Devoir{
 
     @Override
     public void runExercice() {
-        String enonce1 = "Ecrire un programme qui génère une liste aléatoire (sur deux exécutions, la liste est en général\n" +
-"différente) de 100 nombres réels (flottants/décimaux avec deux chiffres maximums derrière la\n" +
-"virgule, qui ne sont en général pas tous des entiers) dans l’intervalle [ 0 ; 10 [, puis écrit dans un\n" +
-"fichier ou sort en console :";
-        Devoir.print(enonce1, exerciceUn(100));
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    private String exerciceUn(int tailleDeListe){
-        String reponse="";
-        List<Double> population = new ArrayList<>();
-        for(int i = 0; i<tailleDeListe; i++){
-            population.add(new Double(((int)(Math.random()*1000))/100));//Dirty way to have %f2
-        }
-        HashMap<Double, Double> frequencyMap = new HashMap();
-        double cran = (1/population.size());
-        for(Double occurence : population){
-            if(frequencyMap.containsKey(occurence)){
-                 frequencyMap.put(occurence, frequencyMap.get(occurence)+cran);
-            }else{
-                frequencyMap.put(occurence, cran);
-            }
-        }
-        
-        for(Double key : frequencyMap.keySet()){
-            reponse+= "Valeur ["+key+"]: freq ["+ frequencyMap.get(key)+"]";
-        }
-        
-        return reponse;
-    }
+
+
     
     
 }
