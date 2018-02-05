@@ -34,7 +34,7 @@ public class Projet implements Devoir{
 "Chacune des lignes suivantes une anagramme de ce mot";
         
         
-        //Devoir.print(enonce1, exerciceUn(6));
+        Devoir.print(enonce1, exerciceUn(6));
         Devoir.print(enonce2, exerciceDeux());
 
     }
@@ -56,26 +56,32 @@ public class Projet implements Devoir{
             else
                 occurences.put(c, 1);
         }
-        TreeSet<String> annagrammes = new TreeSet<>();
+        TreeSet<String> annagrammes = new TreeSet<>();//assure de l'unicité des résultats
+
+        //formule du cours
         int somethingaboutoccurences = 1;
+
         for(char c : occurences.keySet()){
            int nb= occurences.get(c);
            somethingaboutoccurences*=fact(nb);
         }
+        //donne le nombre de combinaisons attendues
         int nb_max = fact(word.length)/somethingaboutoccurences;
+
+        //la seule raison de l'existence de ça ici truc c'est pour randomizer
         Stack<Character> randomrandomrandom = new Stack<>();
         while(annagrammes.size()<nb_max){
             String randomWord ="";
-            randomrandomrandom.addAll(occurences.keySet());
+            //pour peupler la stack sur laquelle on shuffle...
+            for(int x=0; x<word.length;x++) randomrandomrandom.add(word[x]);
             shuffle(randomrandomrandom);
-            for(int l =0; l<7;l++){
+            //pour créer des mots random
+            for(int l =0; l<word.length;l++){
                 randomWord += randomrandomrandom.pop();
             }
-            annagrammes.add(randomWord);
-            System.out.println(randomWord);
-        }
-        System.out.println("working");
 
+            annagrammes.add(randomWord);//les doublons ne sont pas ajoutés
+        }
         return new ArrayList<>(annagrammes);
     }
 
@@ -162,20 +168,20 @@ public class Projet implements Devoir{
         
         rep+= "\nla liste des fréquences de ces mêmes intervalles, toujours séparés par une espace.";
         
-        rep+= "\n[ 0 ; 1 [ -> "+(double)(un/tailleListe*100.)+"%";
-        rep+= "\n[ 1 ; 3 [ -> "+(double)(deux/tailleListe*100.)+"%";
-        rep+= "\n[ 3 ; 7 [ -> "+(double)(trois/tailleListe*100.)+"%";
-        rep+= "\n[ 7 ; 9 [ -> "+(double)(quatre/tailleListe*100.)+"%";
-        rep+= "\n[ 9 ; 10 [ -> "+(double)(cinq/tailleListe*100.)+"%";
+        rep+= "\n[ 0 ; 1 [ -> "+String.format("%,.2f",(double)un/tailleListe*100.+"%");
+        rep+= "\n[ 1 ; 3 [ -> "+String.format("%,.2f",(double)deux/tailleListe*100.+"%");
+        rep+= "\n[ 3 ; 7 [ -> "+String.format("%,.2f",(double)trois/tailleListe*100.+"%");
+        rep+= "\n[ 7 ; 9 [ -> "+String.format("%,.2f",(double)quatre/tailleListe*100.+"%");
+        rep+= "\n[ 9 ; 10 [ -> "+String.format("%,.2f",(double)cinq/tailleListe*100.+"%");
         
         
         rep+= "\na liste des densités de ces mêmes intervalles, toujours séparés par une espace.";
-        
-        rep+= "\n[ 0 ; 1 [ -> "+un/tailleListe;
-        rep+= "\n[ 1 ; 3 [ -> "+deux/tailleListe;
-        rep+= "\n[ 3 ; 7 [ -> "+trois/tailleListe;
-        rep+= "\n[ 7 ; 9 [ -> "+quatre/tailleListe;
-        rep+= "\n[ 9 ; 10 [ -> "+cinq/tailleListe;
+
+        rep+= "\n[ 0 ; 1 [ -> "+String.format("%,.2f",(double)un/tailleListe);
+        rep+= "\n[ 1 ; 3 [ -> "+String.format("%,.2f",(double)deux/tailleListe);
+        rep+= "\n[ 3 ; 7 [ -> "+String.format("%,.2f",(double)trois/tailleListe);
+        rep+= "\n[ 7 ; 9 [ -> "+String.format("%,.2f",(double)quatre/tailleListe);
+        rep+= "\n[ 9 ; 10 [ -> "+String.format("%,.2f",(double)cinq/tailleListe);
         
         
         return rep;
@@ -184,9 +190,13 @@ public class Projet implements Devoir{
     private char[] choisirUnMotDe7lettres() {
         Random r = new Random();
         char[] tab = new char[7];
+        String toPrint = " * exercice 2 : ";
         for(int i=0; i<7;i++){
-            tab[i] = (char)(r.nextInt(26) + 'a');
+            //tab[i] = (char)(r.nextInt(26) + 'a');
+            tab[i] = (char)(r.nextInt(3) + 'a');
+            toPrint+=tab[i];
         }
+        System.out.println(toPrint);
         return tab;
     }
 
