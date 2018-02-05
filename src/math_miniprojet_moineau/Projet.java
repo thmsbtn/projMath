@@ -5,9 +5,14 @@
  */
 package math_miniprojet_moineau;
 
+import java.util.AbstractSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 /**
  *
@@ -25,9 +30,27 @@ public class Projet implements Devoir{
 "différente) de 100 nombres réels (flottants/décimaux avec deux chiffres maximums derrière la\n" +
 "virgule, qui ne sont en général pas tous des entiers) dans l’intervalle [ 0 ; 10 [, puis écrit dans un\n" +
 "fichier ou sort en console :";
-        Devoir.print(enonce1, exerciceUn(100));
+        
+        
+        String enonce2 = "Ecrire un programme qui choisit un mot de 7 lettres de façon aléatoire (sur deux exécutions, le\n" +
+"mot est en général différent) qui n’utilise que les lettres A, B, C, et D, puis écrit dans un fichier\n" +
+"ou sort en console :\n" +
+"Première ligne le mot de 7 lettres obtenu.\n" +
+"Chacune des lignes suivantes une anagramme de ce mot";
+        
+        
+        Devoir.print(enonce1, exerciceUn(6));
+        Devoir.print(enonce2, exerciceDeux());
+
     }
     
+    private String exerciceDeux(){
+        System.out.println("debug");
+        String reponse="";
+        char[] word = choisirUnMotDe7lettres();
+        reponse += makeEveryPossibility(word);
+        return reponse;
+    }
     private String exerciceUn(int tailleDeListe){
         String reponse="";
         List<Double> population = new ArrayList<>();
@@ -68,7 +91,7 @@ public class Projet implements Devoir{
     }
     
     private String listerLesSommesEtFreqDEffectifDesIntervallesPasReguliers(HashMap<Double, Integer> effMap, double tailleListe){
-        String rep = "rappel des intervalles : [ 0 ; 1 [, [ 1 ; 3 [, [ 3 ; 7 [, [ 7 ; 9 [ et [ 9 ; 10 [";
+        String rep = "\nrappel des intervalles : [ 0 ; 1 [, [ 1 ; 3 [, [ 3 ; 7 [, [ 7 ; 9 [ et [ 9 ; 10 [";
         int un=0, deux=0, trois=0, quatre=0, cinq=0;        
         double dun=0, ddeux=0, dtrois=0, dquatre=0, dcinq=0;
 
@@ -112,5 +135,30 @@ public class Projet implements Devoir{
         
         
         return rep;
+    }
+
+    private char[] choisirUnMotDe7lettres() {
+        Random r = new Random();
+        char[] tab = new char[7];
+        for(int i=0; i<7;i++){
+            tab[i] = (char)(r.nextInt(26) + 'a');
+        }
+        return tab;
+    }
+
+    private String randomize(char[] newword) {
+        String randWord = "";
+        char[] nope = {0,0,0,0,0,0,0};int i;
+        
+        while(randWord.length()<7){
+            i = (int) ((Math.random()) * 6);
+            if(nope[i]>0){
+                continue;
+            } else {
+                randWord=randWord+newword[i]+"";
+                nope[i] = 1;
+            }
+        }
+        return randWord;
     }
 }
