@@ -5,6 +5,7 @@
  */
 package math_miniprojet_moineau;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -12,7 +13,6 @@ import java.util.*;
  * @author max
  */
 public class Projet implements Devoir{
-    private final int EXPECTATION = 7*6*5*4*3*2/;
     public Projet() {
         //rien
     }
@@ -72,21 +72,24 @@ public class Projet implements Devoir{
         }
         System.out.println("working");
 
+        return new ArrayList<>(annagrammes);
     }
 
     private char getARandLetter(HashMap<Character, Integer> occurences) {
-       int randomi = (int) (Math.random()*occurences.keySet().size());
+
+        HashMap<Character, Integer> copy = new HashMap<>(occurences);
+
        for(Character c : occurences.keySet()){
-           if(occurences.get(c)==0) continue;
+           if(copy.get(c)==0) continue;
            else {
-               occurences.put(c, occurences.get(c)-1);
+               copy.put(c, copy.get(c)-1);
                return c;
            }
-       }
+       }return '!';//cas d'erreur
     }
 
     private int fact(int nb) {
-        int res=1
+        int res=1;
         for(int i = nb; i>1; i--){
             res*=i;
         }
