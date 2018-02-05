@@ -8,6 +8,8 @@ package math_miniprojet_moineau;
 import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.Set;
  * @author max
  */
 public class Projet implements Devoir{
-
+    private final int EXPECTATION = 7*6*5*4*3*2/;
     public Projet() {
         //rien
     }
@@ -39,17 +41,25 @@ public class Projet implements Devoir{
 "Chacune des lignes suivantes une anagramme de ce mot";
         
         
-        Devoir.print(enonce1, exerciceUn(6));
+        //Devoir.print(enonce1, exerciceUn(6));
         Devoir.print(enonce2, exerciceDeux());
 
     }
     
     private String exerciceDeux(){
-        System.out.println("debug");
         String reponse="";
+        ArrayList<String> listToTranslate;
         char[] word = choisirUnMotDe7lettres();
-        reponse += makeEveryPossibility(word);
+        listToTranslate = new ArrayList<>(makeEveryPossibility(word));
+        reponse += listToString(listToTranslate);
         return reponse;
+    }
+    private String listToString(ArrayList<String> listToTranslate){
+        String res ="";
+        for(String s : listToTranslate)
+            res+=s+"\n";
+       
+        return res;
     }
     private String exerciceUn(int tailleDeListe){
         String reponse="";
@@ -162,14 +172,13 @@ public class Projet implements Devoir{
         return randWord;
     }
     
-    String makeEveryPossibility(char[] word){
-       //TODO
-        for(int a; a<word.length; a++){
-            for(int b; b<word.length; b++){
-                if(a!=b){
-                    
-                }
-            }
-        }        
+
+    private int computeNbOfAnagramme(char[] word){
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(char c : word){
+            if(map.containsKey(c)) map.put(c, map.get(c)+1);
+            else map.put(c,1);
+        }
+        return map.size();
     }
 }
